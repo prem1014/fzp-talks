@@ -9,6 +9,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import './Registration.component.scss';
 import Button from '@material-ui/core/Button';
 import AppService from '../../Service/App-service';
+import Toaster from '../../Shared/Toaster/Toaster.component';
+import Modal from '../../Shared/Modal/Modal.component';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const UserRegistration = () => {
+    let toasterTyp: 'success' | 'info' | 'warning' | 'error' | undefined;
+    let toasterTypeInfo: 'info' = 'info';
     const classes = useStyles();
+    const history = useHistory();
 
     const initForm: any = {
         name: '',
@@ -34,6 +40,10 @@ const UserRegistration = () => {
     }
 
     const [userInfo, setUserInfo] = useState(initForm);
+    const [isOpen, setIsOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
+    const [toasterType, setToasterType] = useState(toasterTyp);
 
     const wardChanged = (e: any) => {
         let updatedState = { ...userInfo};
@@ -55,10 +65,17 @@ const UserRegistration = () => {
     }
 
     const userReg = () => {
-        console.log(userInfo);
-        AppService.saveUsers(userInfo)
+        setLoading(true);
+        AppService.saveUsers({...userInfo, _id: userInfo.mobile})
         .then( res => {
-            console.log(res);
+            setToasterType('success');
+            if(!res.data.success) {
+                setToasterType('info');
+            }
+            setLoading(false);
+            setMessage(res.data.message);
+            setIsOpen(true);
+            setLoading(false);
         })
         .catch( err => {
             console.log(err);
@@ -69,6 +86,11 @@ const UserRegistration = () => {
         let updatedState = { ...userInfo};
         updatedState[type] = e.target.value;
         setUserInfo(updatedState);
+    }
+
+    const onToasterClose = () => {
+        history.push('/home');
+        setIsOpen(true);
     }
 
     return (
@@ -118,6 +140,10 @@ const UserRegistration = () => {
                 </form>
             </div>
             <div className="col-lg-lg-2 col-md-2 col-12"></div>
+            <Toaster message={message} severity={toasterType} isOpen={isOpen} close={() => onToasterClose()}/>
+            {
+                loading && <Modal message="आपका पंजीकरण हो रहा हैं, कृपया प्रतीक्षा कीजिये।"/>
+            }
         </div>
     )
 }
