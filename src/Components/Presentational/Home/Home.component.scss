@@ -1,0 +1,16 @@
+.home {
+    .vission {
+        margin: 10px 0px;
+        padding: 15px;
+
+        .feedback {
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 10px 0px;
+            .item {
+                padding: 15px;
+                margin: 10px;
+            }
+        }
+    }
+}
