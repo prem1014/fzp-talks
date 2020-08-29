@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 class AppService {
-    //private static apiUrl = 'http://localhost:9000/api/';
-    private static apiUrl = 'https://nrf-api.herokuapp.com/api/'
+    private static apiUrl = 'http://localhost:9000/api/';
+    //private static apiUrl = 'https://nrf-api.herokuapp.com/api/'
     constructor() {
 
     }
@@ -21,6 +21,10 @@ class AppService {
 
     public static getUsers(): Promise<any> {
         return axios.get(this.apiUrl + 'user')
+    }
+
+    public static getFeedBackAndUsers(): Promise<any> {
+        return axios.all([AppService.getFeedback(), AppService.getUsers()])
     }
 }
 

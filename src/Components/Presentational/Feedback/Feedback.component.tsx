@@ -137,7 +137,7 @@ const Feedback = () => {
             <div className="col-lg-lg-2 col-md-2 col-12"></div>
             <Toaster message={message} severity={toasterType} isOpen={isOpen} close={() => onToasterClose()}/>
             {
-                loading && <Modal message="आपका सुझाव सेभ हो रहा है, कृपया प्रतीक्षा कीजि।।।"/>
+                loading && <Modal message="आपका सुझाव सेभ हो रहा है, कृपया प्रतीक्षा कीजिये"/>
             }
         </div>
     )
