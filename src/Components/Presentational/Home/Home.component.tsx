@@ -14,9 +14,14 @@ import waterIssue from '../../../Assets/waterIssue.jpg';
 import flood from '../../../Assets/flood.jpg';
 
 const Home = () => {
+    let initUser = {
+        name: '',
+        count: 0,
+        ward: ''
+    }
     const history = useHistory();
     const [feedbacks, setFeedbacks] = useState([]);
-    const [users, setUsers] = useState(0);
+    const [users, setUsers] = useState(initUser);
     const [loading, setLoading] = useState(false);
 
     const listOfPratinidhi = [
@@ -97,8 +102,8 @@ const Home = () => {
         setLoading(true);
         AppService.getFeedBackAndUsers()
         .then(res => {
-            setUsers(res[1].data.totalUsers);
-            setFeedbacks(res[0].data.result);
+            setUsers(res[1].data);
+            setFeedbacks(res[0].data.result.reverse());
             setLoading(false);
         })
         .catch(err => {
@@ -124,8 +129,9 @@ const Home = () => {
                             राजनीतिक नेतृत्व का निर्माण करना है।
                         </h5>
                         <hr />
-                        <h2 className="text-center">{users}</h2>
+                        <h2 className="text-center">{users.count}</h2>
                         <h5 className="text-center" style={{color: '#07cc10', fontWeight: 'bold'}}>लोग हमसे जुड़ चुके है।</h5>
+                        <p>अभी अभी <strong>{users.name} जी</strong> <strong>(वार्ड {users.ward})</strong> हमसे जुड़ चुके हैं। हमसे जुड़ने के लिए आपका बहुत बहुत धन्यवाद । </p>
                         <hr />
                         <h5 className="text-center">
                             <Button variant="contained" color="primary" onClick={() => userReg()}>हमसे जुड़ें</Button>
@@ -223,7 +229,7 @@ const Home = () => {
                                     <h4 className="text-center" style={{color: '#3535d1'}}>स्वास्थ सेवाओं की कमी</h4>
                                     <hr />
                                     <p>
-                                    स्वास्थ की सुबिधा हमारे पूरे बिहार में कैसी है ये किसी से छुपा नहीं है। और हमारा पंचायत भी उससे अछूता नहीं।
+                                    स्वास्थ की सुविधा हमारे पूरे बिहार में कैसी है ये किसी से छुपा नहीं है। और हमारा पंचायत भी उससे अछूता नहीं।
                                     </p>
                                     <p>
                                     कुछ साल पहले हमारे पंचायत के स्वर्गीय नंदू राय जी के द्वारा एक प्राथमिक स्वास्थ केंद्र का निर्माण हुआ था।  कुछ वर्षो तक उस स्वास्थ केंद्र में लोगों का इलाज हुआ करता था और लोगों को बहुत हद तक सहूलियत भी था।  लेकिन कुछ वर्षो से ये स्वास्थ केंद्र बस एक देखने की जगह है जहां पे सिर्फ आपको कुछ मवेशी दिखाई देंगे, अब ना तो वहां कोई डॉक्टर आते है और ना ही किसी का इलाज होता है। 
@@ -262,7 +268,7 @@ const Home = () => {
                                     "ज्ञान ही आपका असली हक़ दिलाता हैं " ये बात 100 फीसदी सही हैं। अगर आपके पास अच्छी शिक्षा हैं तो आप किसी भी प्रकार की समस्या को बहुत आसानी से सुलझा सकते हैं। 
                                     </p>
                                     <p>
-                                    लेकिन हमारे पंचायत में आज भी अच्छी शिक्षण संस्थान की कमी हैं।  कहने के लिए तो हमारे पंचायत में +2 स्कूल हैं लेकन उसमें एक भी लैब की सुबिधा नहीं हैं। कंप्यूटर शिक्षा बस पाठ्यक्रम तक ही सिमित हैं। 
+                                    लेकिन हमारे पंचायत में आज भी अच्छी शिक्षण संस्थान की कमी हैं।  कहने के लिए तो हमारे पंचायत में +2 स्कूल हैं लेकन उसमें एक भी लैब की सुविधा नहीं हैं। कंप्यूटर शिक्षा बस पाठ्यक्रम तक ही सिमित हैं। 
                                     </p>
                                 </div>
                             </div>

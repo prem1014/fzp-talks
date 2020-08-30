@@ -97,7 +97,7 @@ const UserRegistration = () => {
         <div className="row marginTop20px">
             <div className="col-lg-lg-2 col-md-2 col-12"></div>
             <div className="col-lg-lg-8 col-md-8 col-12 app-box-shadow user-reg">
-                <h4 className="text-center">हमसे जुड़िये और अपने पंचयात को विकिसित बनाने में मदद कीजिये</h4>
+                <h4 className="text-center">हमसे जुड़िये और अपने पंचायत को विकसित बनाने में मदद कीजिये</h4>
                 <hr />
                 <form>
                     <div className="row">
