@@ -66,7 +66,7 @@ const Feedback = () => {
 
     const saveFeedback = () => {
         setLoading(true);
-        AppService.saveFeedback(feedbackDetails)
+        AppService.saveFeedback({...feedbackDetails, _id: new Date().getTime()})
         .then( res => {
             setLoading(false);
             setMessage(res.data.message);

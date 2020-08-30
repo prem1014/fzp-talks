@@ -76,6 +76,9 @@ const UserRegistration = () => {
             setMessage(res.data.message);
             setIsOpen(true);
             setLoading(false);
+            setTimeout( () => {
+                history.push('/home');
+            }, 15000)
         })
         .catch( err => {
             console.log(err);

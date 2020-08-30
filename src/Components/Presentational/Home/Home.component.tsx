@@ -111,6 +111,17 @@ const Home = () => {
         });
     }
 
+    const likeFeedback = (feedbackId: string) => {
+        AppService.updateFeedback(feedbackId)
+            .then( res => {
+                debugger
+                if(res.data.success) getFeedbackUsers();
+            })
+            .catch( err => {
+
+            })
+    }
+
     useEffect(() => {
         getFeedbackUsers();
     }, []);
@@ -151,6 +162,12 @@ const Home = () => {
                                         {
                                             res.name && <a style={{ color: '#26C6DA', fontWeight: 'bold' }}>सुझाव देने वाला का नाम: {res.name}</a>
                                         }
+                                        <div>
+                                            <span className="like-btn" onClick={() => likeFeedback(res._id)}>
+                                                <i className="fab fa-gratipay"></i>
+                                                <span style={{color: 'blue', margin: '0 10px'}}>{res.likes ? res.likes : 0}</span>
+                                            </span>
+                                        </div>
                                     </div>
                                 ))
                             }
@@ -168,8 +185,10 @@ const Home = () => {
                         <hr />
                         <ol style={{ fontWeight: 'bold' }}>
                             <li style={{ color: '#FF6F00' }}>के एन शर्मा हाई स्कूल फैज़ुल्लाहपुर</li>
-                            <li style={{ color: '#00BCD4' }}>उत्क्रमित मध्य विद्यालय नरवार</li>
+                            <li style={{ color: '#00BCD4' }}>कन्या मध्य विद्यालय नरवार</li>
                             <li style={{ color: '#4CAF50' }}>उत्क्रमित मध्य विद्यालय श्यामनगर</li>
+                            <li style={{ color: '#FFB300' }}>नवसृजित विद्यालय पूरब टोला</li>
+                            <li style={{ color: '#42A5F5' }}>नवसृजित विद्यालय खोमारीपुर</li>
                         </ol>
                     </div>
                 </div>
