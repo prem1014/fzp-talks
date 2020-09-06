@@ -46,13 +46,6 @@ const Modal: React.FC<any> = (props: any) => {
                                 {
                                     props.children
                                 }
-                                <h6 className="text-center">
-                                    <button
-                                        className="btn btn-info"
-                                        style={{ margin: '10px' }}
-                                        onClick={props.ok}
-                                    >Ok</button>
-                                </h6>
                             </div>
                         </div>
                     }

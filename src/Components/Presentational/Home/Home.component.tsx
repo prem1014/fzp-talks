@@ -307,11 +307,19 @@ const Home = () => {
             }
             {
                 openModal &&
-                <Modal message="" custom={true} ok={() => saveMukhiyaLikes()}>
+                <Modal message="" custom={true}>
                     <TextField
                         id="name"
                         label="अपना मोबाइल नंबर अंकित कीजिये और ओके करें"
                         value={mobileNo} onChange={(e) => inputHandler(e)}/>
+                    <h6 className="text-center">
+                        <button
+                            className="btn btn-info"
+                            style={{ margin: '10px' }}
+                            disabled={mobileNo.length !== 10}
+                            onClick={() => saveMukhiyaLikes()}
+                        >Ok</button>
+                    </h6>
                 </Modal>
             }
         </div>
