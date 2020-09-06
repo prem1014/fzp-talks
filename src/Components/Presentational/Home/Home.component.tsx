@@ -9,6 +9,7 @@ import AppService from '../../Service/App-service';
 import LinkedList from '../../Shared/LinkedList/linkedList';
 import HashTable from '../../Shared/Hashtable/HashTable';
 import Modal from '../../Shared/Modal/Modal.component';
+import TextField from '@material-ui/core/TextField';
 
 import waterIssue from '../../../Assets/waterIssue.jpg';
 import flood from '../../../Assets/flood.jpg';
@@ -24,6 +25,9 @@ const Home = () => {
     const [listOfPratinidhi, setListOfPratinidhi] = useState([]);
     const [users, setUsers] = useState(initUser);
     const [loading, setLoading] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+    const [mobileNo, setMobileNo] = useState('');
+    const [mukhiyaId, setMukhiyaId] = useState('');
 
     const feedbackList = [
         {
@@ -66,7 +70,14 @@ const Home = () => {
             .then(res => {
                 setUsers(res[1].data);
                 setFeedbacks(res[0].data.result.reverse());
-                setListOfPratinidhi(res[2].data.result);
+                let listOfMukhiya = res[2].data.result.sort( (a: any, b: any) => {
+                    if(a.fromYr < b.fromYr) { return -1; }
+                    if(a.fromYr > b.fromYr) { return 1; }
+                    return 0;
+                })
+                listOfMukhiya[1].fromYr = 'May ' + listOfMukhiya[1].fromYr;
+                listOfMukhiya[1].toYr = 'July ' + listOfMukhiya[1].toYr;
+                setListOfPratinidhi(listOfMukhiya);
                 setLoading(false);
             })
             .catch(err => {
@@ -85,13 +96,23 @@ const Home = () => {
     }
 
     const likeMukhiya = (id: string) => {
-        AppService.updateMukhiyaDetails(id)
-            .then(res => {
-                if (res.data.success) getFeedbackUsers();
-            })
-            .catch(err => {
+        setOpenModal(true)
+        setMukhiyaId(id)
+    }
 
-            })
+    const inputHandler = (e: any) => {
+        setMobileNo(e.target.value);
+    }
+
+    const saveMukhiyaLikes = () => {
+        setOpenModal(false)
+        AppService.updateMukhiyaDetails(mukhiyaId, mobileNo)
+        .then(res => {
+            if (res.data.success) getFeedbackUsers();
+        })
+        .catch(err => {
+
+        })
     }
 
     useEffect(() => {
@@ -283,6 +304,15 @@ const Home = () => {
             </div>
             {
                 loading && <Modal message="डाटा लोड हो रहा है, कृपया प्रतीक्षा कीजिये" />
+            }
+            {
+                openModal &&
+                <Modal message="" custom={true} ok={() => saveMukhiyaLikes()}>
+                    <TextField
+                        id="name"
+                        label="अपना मोबाइल नंबर अंकित कीजिये और ओके करें"
+                        value={mobileNo} onChange={(e) => inputHandler(e)}/>
+                </Modal>
             }
         </div>
     )

@@ -31,8 +31,8 @@ class AppService {
         return axios.get(this.apiUrl + 'mukhiya');
     }
 
-    public static updateMukhiyaDetails(id: string): Promise<any> {
-        return axios.put(this.apiUrl + 'mukhiya/' + id);
+    public static updateMukhiyaDetails(id: string, mobileNo: string): Promise<any> {
+        return axios.put(this.apiUrl + 'mukhiya/' + id, {mobileNo: mobileNo});
     }
 
     public static getFeedBackAndUsers(): Promise<any> {

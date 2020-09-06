@@ -15,7 +15,7 @@ const Modal: React.FC<any> = (props: any) => {
                 </div> */}
                 <div className="mera-school-modal-body">
                     {
-                        !props.confirmation &&
+                        !props.confirmation && !props.custom &&
                         <div className="loader-container">
                             <Loader />
                         </div>
@@ -37,6 +37,24 @@ const Modal: React.FC<any> = (props: any) => {
                             </div>
                         </div>
 
+                    }
+
+                    {
+                        props.custom && 
+                        <div className="row">
+                            <div className="col-12">
+                                {
+                                    props.children
+                                }
+                                <h6 className="text-center">
+                                    <button
+                                        className="btn btn-info"
+                                        style={{ margin: '10px' }}
+                                        onClick={props.ok}
+                                    >Ok</button>
+                                </h6>
+                            </div>
+                        </div>
                     }
 
                 </div>
