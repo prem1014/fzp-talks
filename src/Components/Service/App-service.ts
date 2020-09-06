@@ -27,8 +27,16 @@ class AppService {
         return axios.get(this.apiUrl + 'user')
     }
 
+    public static getListOfMukhiyak(): Promise<any> {
+        return axios.get(this.apiUrl + 'mukhiya');
+    }
+
+    public static updateMukhiyaDetails(id: string): Promise<any> {
+        return axios.put(this.apiUrl + 'mukhiya/' + id);
+    }
+
     public static getFeedBackAndUsers(): Promise<any> {
-        return axios.all([AppService.getFeedback(), AppService.getUsers()])
+        return axios.all([AppService.getFeedback(), AppService.getUsers(), AppService.getListOfMukhiyak()])
     }
 }
 

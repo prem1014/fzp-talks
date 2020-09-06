@@ -7,10 +7,6 @@
             max-height: 300px;
             overflow-y: auto;
             margin: 10px 0px;
-            .item {
-                padding: 15px;
-                margin: 10px;
-            }
         }
     }
 
@@ -23,5 +19,23 @@
         color: #F4511E;
         font-size: 20px;
         cursor: pointer;
+    }
+    .item {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .karveer-af {
+        color: #42A5F5;
+
+        span {
+            color: #FFC107;
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .like-btn-container {
+      float: right;
     }
 }

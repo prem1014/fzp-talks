@@ -21,47 +21,9 @@ const Home = () => {
     }
     const history = useHistory();
     const [feedbacks, setFeedbacks] = useState([]);
+    const [listOfPratinidhi, setListOfPratinidhi] = useState([]);
     const [users, setUsers] = useState(initUser);
     const [loading, setLoading] = useState(false);
-
-    const listOfPratinidhi = [
-        {
-            name: 'स्वर्गीय नंदू राय',
-            post: 'मुखिया',
-            fromYr: '1978',
-            toYr: '2001'
-        },
-        {
-            name: 'स्वर्गीय नंदू राय',
-            post: 'मुखिया',
-            fromYr: 'May 2001',
-            toYr: 'July 2001'
-        },
-        {
-            name: 'विजय कुमार शर्मा',
-            post: 'मुखिया',
-            fromYr: '2002',
-            toYr: '2006'
-        },
-        {
-            name: 'विजय कुमार शर्मा',
-            post: 'मुखिया',
-            fromYr: '2006',
-            toYr: '2011'
-        },
-        {
-            name: 'विजय कुमार शर्मा',
-            post: 'मुखिया',
-            fromYr: '2011',
-            toYr: '2016'
-        },
-        {
-            name: 'कुंती देवी',
-            post: 'मुखिया',
-            fromYr: '2016',
-            toYr: 'अब तक'
-        },
-    ]
 
     const feedbackList = [
         {
@@ -101,23 +63,33 @@ const Home = () => {
     const getFeedbackUsers = () => {
         setLoading(true);
         AppService.getFeedBackAndUsers()
-        .then(res => {
-            setUsers(res[1].data);
-            setFeedbacks(res[0].data.result.reverse());
-            setLoading(false);
-        })
-        .catch(err => {
-            setLoading(false);
-        });
+            .then(res => {
+                setUsers(res[1].data);
+                setFeedbacks(res[0].data.result.reverse());
+                setListOfPratinidhi(res[2].data.result);
+                setLoading(false);
+            })
+            .catch(err => {
+                setLoading(false);
+            });
     }
 
     const likeFeedback = (feedbackId: string) => {
         AppService.updateFeedback(feedbackId)
-            .then( res => {
-                debugger
-                if(res.data.success) getFeedbackUsers();
+            .then(res => {
+                if (res.data.success) getFeedbackUsers();
             })
-            .catch( err => {
+            .catch(err => {
+
+            })
+    }
+
+    const likeMukhiya = (id: string) => {
+        AppService.updateMukhiyaDetails(id)
+            .then(res => {
+                if (res.data.success) getFeedbackUsers();
+            })
+            .catch(err => {
 
             })
     }
@@ -141,7 +113,7 @@ const Home = () => {
                         </h5>
                         <hr />
                         <h2 className="text-center">{users.count}</h2>
-                        <h5 className="text-center" style={{color: '#07cc10', fontWeight: 'bold'}}>लोग हमसे जुड़ चुके है।</h5>
+                        <h5 className="text-center" style={{ color: '#07cc10', fontWeight: 'bold' }}>लोग हमसे जुड़ चुके है।</h5>
                         <p>अभी अभी <strong>{users.name} जी</strong> <strong>(वार्ड {users.ward})</strong> हमसे जुड़ चुके हैं। हमसे जुड़ने के लिए आपका बहुत बहुत धन्यवाद । </p>
                         <hr />
                         <h5 className="text-center">
@@ -165,7 +137,7 @@ const Home = () => {
                                         <div>
                                             <span className="like-btn" onClick={() => likeFeedback(res._id)}>
                                                 <i className="fab fa-gratipay"></i>
-                                                <span style={{color: 'blue', margin: '0 10px'}}>{res.likes ? res.likes : 0}</span>
+                                                <span style={{ color: 'blue', margin: '0 10px' }}>{res.likes ? res.likes : 0}</span>
                                             </span>
                                         </div>
                                     </div>
@@ -208,9 +180,17 @@ const Home = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        listOfPratinidhi.map(d => (
+                                        listOfPratinidhi.map((d: any) => (
                                             <tr>
-                                                <td>{d.name}</td>
+                                                <td>
+                                                    {d.name}
+                                                    <div className="like-btn-container">
+                                                        <span className="like-btn" onClick={() => likeMukhiya(d._id)}>
+                                                            <i className="fab fa-gratipay"></i>
+                                                            <span style={{ color: 'blue', margin: '0 10px' }}>{d.likes ? d.likes : 0}</span>
+                                                        </span>
+                                                    </div>
+                                                </td>
                                                 <td>{d.post}</td>
                                                 <td>{d.fromYr}</td>
                                                 <td>{d.toYr}</td>
@@ -230,64 +210,64 @@ const Home = () => {
                         <div className="row">
                             <div className="col-lg-3">
                                 <div className="vission app-box-shadow">
-                                    <h4 className="text-center" style={{color: 'red'}}>बाढ़</h4>
+                                    <h4 className="text-center" style={{ color: 'red' }}>बाढ़</h4>
                                     <hr />
                                     <p>
-                                    बाढ़ हमारे पंचायत की सबसे बड़ी समस्या है।  आज भी लगभग हर साल बाढ़ हमारे पंचायत के लोगों को हर प्रकार की क्षति पहुंचाने में हर आपदा से आगे है।
+                                        बाढ़ हमारे पंचायत की सबसे बड़ी समस्या है।  आज भी लगभग हर साल बाढ़ हमारे पंचायत के लोगों को हर प्रकार की क्षति पहुंचाने में हर आपदा से आगे है।
                                     </p>
                                     <p>
-                                    हर साल लाखों के फसल बर्बाद हो जाते है।  हमारे पंचायत के सभी किसान मूल रूप से अपने खेती पे ही आश्रित होते है।  हर वर्ष किसान जी जान से खेती करते है और फिर गंडक नदी का पानी बाढ़ रुपी आपदा के रूप में आ के उनके मेहनत की कमाई को अपने साथ बहा ले जाता है।
+                                        हर साल लाखों के फसल बर्बाद हो जाते है।  हमारे पंचायत के सभी किसान मूल रूप से अपने खेती पे ही आश्रित होते है।  हर वर्ष किसान जी जान से खेती करते है और फिर गंडक नदी का पानी बाढ़ रुपी आपदा के रूप में आ के उनके मेहनत की कमाई को अपने साथ बहा ले जाता है।
                                     </p>
                                     <p>
-                                        <img src={flood} style={{width: '100%'}} />
+                                        <img src={flood} style={{ width: '100%' }} />
                                     </p>
                                 </div>
                             </div>
                             <div className="col-lg-3">
                                 <div className="vission app-box-shadow">
-                                    <h4 className="text-center" style={{color: '#3535d1'}}>स्वास्थ सेवाओं की कमी</h4>
+                                    <h4 className="text-center" style={{ color: '#3535d1' }}>स्वास्थ सेवाओं की कमी</h4>
                                     <hr />
                                     <p>
-                                    स्वास्थ की सुविधा हमारे पूरे बिहार में कैसी है ये किसी से छुपा नहीं है। और हमारा पंचायत भी उससे अछूता नहीं।
+                                        स्वास्थ की सुविधा हमारे पूरे बिहार में कैसी है ये किसी से छुपा नहीं है। और हमारा पंचायत भी उससे अछूता नहीं।
                                     </p>
                                     <p>
-                                    कुछ साल पहले हमारे पंचायत के स्वर्गीय नंदू राय जी के द्वारा एक प्राथमिक स्वास्थ केंद्र का निर्माण हुआ था।  कुछ वर्षो तक उस स्वास्थ केंद्र में लोगों का इलाज हुआ करता था और लोगों को बहुत हद तक सहूलियत भी था।  लेकिन कुछ वर्षो से ये स्वास्थ केंद्र बस एक देखने की जगह है जहां पे सिर्फ आपको कुछ मवेशी दिखाई देंगे, अब ना तो वहां कोई डॉक्टर आते है और ना ही किसी का इलाज होता है। 
+                                        कुछ साल पहले हमारे पंचायत के स्वर्गीय नंदू राय जी के द्वारा एक प्राथमिक स्वास्थ केंद्र का निर्माण हुआ था।  कुछ वर्षो तक उस स्वास्थ केंद्र में लोगों का इलाज हुआ करता था और लोगों को बहुत हद तक सहूलियत भी था।  लेकिन कुछ वर्षो से ये स्वास्थ केंद्र बस एक देखने की जगह है जहां पे सिर्फ आपको कुछ मवेशी दिखाई देंगे, अब ना तो वहां कोई डॉक्टर आते है और ना ही किसी का इलाज होता है।
                                     </p>
                                     <p>
-                                    अब लोगों को किसी भी प्रकार की स्वास्थ सेवाओं के लिए घर से २० किलो मीटर दूर जाना पड़ता है और कभी कभी लोगों को समय के अभाव में अपनी जान भी देनी पड़ती है। 
+                                        अब लोगों को किसी भी प्रकार की स्वास्थ सेवाओं के लिए घर से २० किलो मीटर दूर जाना पड़ता है और कभी कभी लोगों को समय के अभाव में अपनी जान भी देनी पड़ती है।
                                     </p>
                                 </div>
                             </div>
                             <div className="col-lg-3">
                                 <div className="vission app-box-shadow">
-                                    <h4 className="text-center" style={{color: '#5ee35e'}}>साफ़ पानी की समस्या</h4>
+                                    <h4 className="text-center" style={{ color: '#5ee35e' }}>साफ़ पानी की समस्या</h4>
                                     <hr />
                                     <p>
-                                    आज के समय में पिने योग्य पानी की समस्या एक बहुत बड़ी चिंता का विषय है। हमारे जीवन काल में बहुत सी बीमारियां पानी की सही गुणवत्ता नहीं होने कारन होती हैं। 
+                                        आज के समय में पिने योग्य पानी की समस्या एक बहुत बड़ी चिंता का विषय है। हमारे जीवन काल में बहुत सी बीमारियां पानी की सही गुणवत्ता नहीं होने कारन होती हैं।
                                     </p>
                                     <p>
-                                    जल की गुणवत्ता की कमी से होने वाली बिमारिओं से 2018 में 2, 439 लोगों की जान हमारे सम्पूर्ण भारत में हुई थीं। और ये हर साल बढ़ते जा रहे हैं। 
+                                        जल की गुणवत्ता की कमी से होने वाली बिमारिओं से 2018 में 2, 439 लोगों की जान हमारे सम्पूर्ण भारत में हुई थीं। और ये हर साल बढ़ते जा रहे हैं।
                                     </p>
                                     <p>
-                                    वार्षिक रूप से लगभग 37.7 मिलियन भारतीय जलजनित बीमारियों से प्रभावित हैं
+                                        वार्षिक रूप से लगभग 37.7 मिलियन भारतीय जलजनित बीमारियों से प्रभावित हैं
                                     </p>
                                     <p>
-                                        <img src={waterIssue} style={{width: '100%'}}/>
+                                        <img src={waterIssue} style={{ width: '100%' }} />
                                     </p>
                                 </div>
                             </div>
                             <div className="col-lg-3">
                                 <div className="vission app-box-shadow">
-                                    <h4 className="text-center" style={{color: '#FF6F00'}}>शैक्षिक संस्थान</h4>
+                                    <h4 className="text-center" style={{ color: '#FF6F00' }}>शैक्षिक संस्थान</h4>
                                     <hr />
                                     <p>
-                                    आज के समय में अच्छी शिक्षा मिलना इतना असान नहीं हैं जितना हम सब समझते हैं। एक अच्छी और गुणवत्ता पूर्वक शिक्षा के लिए अच्छे स्कूल का होना बहुत जरुरी हैं। 
+                                        आज के समय में अच्छी शिक्षा मिलना इतना असान नहीं हैं जितना हम सब समझते हैं। एक अच्छी और गुणवत्ता पूर्वक शिक्षा के लिए अच्छे स्कूल का होना बहुत जरुरी हैं।
                                     </p>
                                     <p>
-                                    "ज्ञान ही आपका असली हक़ दिलाता हैं " ये बात 100 फीसदी सही हैं। अगर आपके पास अच्छी शिक्षा हैं तो आप किसी भी प्रकार की समस्या को बहुत आसानी से सुलझा सकते हैं। 
+                                        "ज्ञान ही आपका असली हक़ दिलाता हैं " ये बात 100 फीसदी सही हैं। अगर आपके पास अच्छी शिक्षा हैं तो आप किसी भी प्रकार की समस्या को बहुत आसानी से सुलझा सकते हैं।
                                     </p>
                                     <p>
-                                    लेकिन हमारे पंचायत में आज भी अच्छी शिक्षण संस्थान की कमी हैं।  कहने के लिए तो हमारे पंचायत में +2 स्कूल हैं लेकन उसमें एक भी लैब की सुविधा नहीं हैं। कंप्यूटर शिक्षा बस पाठ्यक्रम तक ही सिमित हैं। 
+                                        लेकिन हमारे पंचायत में आज भी अच्छी शिक्षण संस्थान की कमी हैं।  कहने के लिए तो हमारे पंचायत में +2 स्कूल हैं लेकन उसमें एक भी लैब की सुविधा नहीं हैं। कंप्यूटर शिक्षा बस पाठ्यक्रम तक ही सिमित हैं।
                                     </p>
                                 </div>
                             </div>
@@ -295,8 +275,22 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <div className="row">
+                <div className="col-12">
+                    <div className="vission app-box-shadow">
+                        <h4 className="text-center app-title">हमारे पंचायत के कर्मवीर</h4>
+                        <hr />
+                        <h5 className="text-center">
+                            हमारे पंचायत को वो कर्मवीर जो निरन्तर अपने देश की सेवा कर रहे है या देश की सेवा करने के बाद सेवानिवृत हो चुके है।
+                            हम सब पंचायत की ओर से इन सब जाबाज कर्मवीरों को तहे दिल से शुक्रिया करते है। 
+                        </h5>
+                        <div className="row">
+                        </div>
+                    </div>
+                </div>
+            </div>
             {
-                loading && <Modal message="डाटा लोड हो रहा है, कृपया प्रतीक्षा कीजिये"/>
+                loading && <Modal message="डाटा लोड हो रहा है, कृपया प्रतीक्षा कीजिये" />
             }
         </div>
     )
