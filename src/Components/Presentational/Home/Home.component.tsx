@@ -278,14 +278,6 @@ const Home = () => {
             <div className="row">
                 <div className="col-12">
                     <div className="vission app-box-shadow">
-                        <h4 className="text-center app-title">हमारे पंचायत के कर्मवीर</h4>
-                        <hr />
-                        <h5 className="text-center">
-                            हमारे पंचायत को वो कर्मवीर जो निरन्तर अपने देश की सेवा कर रहे है या देश की सेवा करने के बाद सेवानिवृत हो चुके है।
-                            हम सब पंचायत की ओर से इन सब जाबाज कर्मवीरों को तहे दिल से शुक्रिया करते है। 
-                        </h5>
-                        <div className="row">
-                        </div>
                     </div>
                 </div>
             </div>
