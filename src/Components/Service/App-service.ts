@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 class AppService {
-    //private static apiUrl = 'http://localhost:9000/api/';
-    private static apiUrl = 'https://nrf-api.herokuapp.com/api/'
+    private static apiUrl = 'http://localhost:9000/api/';
+    //private static apiUrl = 'https://nrf-api.herokuapp.com/api/'
     constructor() {
 
     }
@@ -31,8 +31,8 @@ class AppService {
         return axios.get(this.apiUrl + 'mukhiya');
     }
 
-    public static updateMukhiyaDetails(id: string, mobileNo: string): Promise<any> {
-        return axios.put(this.apiUrl + 'mukhiya/' + id, {mobileNo: mobileNo});
+    public static updateMukhiyaDetails(id: string, likesDetails: any): Promise<any> {
+        return axios.put(this.apiUrl + 'mukhiya/' + id, {likesDetails: likesDetails});
     }
 
     public static getFeedBackAndUsers(): Promise<any> {

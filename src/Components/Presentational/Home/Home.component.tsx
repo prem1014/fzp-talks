@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 
 import waterIssue from '../../../Assets/waterIssue.jpg';
 import flood from '../../../Assets/flood.jpg';
+import Toaster from '../../Shared/Toaster/Toaster.component';
 
 const Home = () => {
     let initUser = {
@@ -20,6 +21,7 @@ const Home = () => {
         count: 0,
         ward: ''
     }
+    const [isOpen, setIsOpen] = useState(false);
     const history = useHistory();
     const [feedbacks, setFeedbacks] = useState([]);
     const [listOfPratinidhi, setListOfPratinidhi] = useState([]);
@@ -105,14 +107,25 @@ const Home = () => {
     }
 
     const saveMukhiyaLikes = () => {
-        setOpenModal(false)
-        AppService.updateMukhiyaDetails(mukhiyaId, mobileNo)
+        if(localStorage.getItem('dynamicUserId')) {
+            setOpenModal(false);
+            setIsOpen(true);
+            return;
+        } else {
+            localStorage.setItem('dynamicUserId', '' + new Date().getTime());
+        }
+        setOpenModal(false);
+        AppService.updateMukhiyaDetails(mukhiyaId, {mobileNo: mobileNo, id: localStorage.getItem('dynamicUserId')})
         .then(res => {
             if (res.data.success) getFeedbackUsers();
         })
         .catch(err => {
 
-        })
+        });
+    }
+
+    const onToasterClose = () => {
+        setIsOpen(false);
     }
 
     useEffect(() => {
@@ -305,6 +318,7 @@ const Home = () => {
             {
                 loading && <Modal message="डाटा लोड हो रहा है, कृपया प्रतीक्षा कीजिये" />
             }
+             <Toaster message="आपके मोबाइल फ़ोन से लाइक किया जा चूका है।  आपका बहुत बहुत धन्यवाद। " severity="info" isOpen={isOpen} close={() => onToasterClose()}/>
             {
                 openModal &&
                 <Modal message="" custom={true}>
