@@ -158,6 +158,7 @@ const Home = () => {
                 <div className="col-lg-8 col-md-8 col-12">
                     <div className="vission app-box-shadow">
                         <h4 className="text-center app-title">गांव के विकाश के लिए प्राप्त सुझाव</h4>
+                        <h6 className="text-center app-title">कुल {feedbacks.length} सुझाव प्राप्त हुआ है। </h6>
                         <hr />
                         <div className="feedback">
                             {
@@ -167,6 +168,9 @@ const Home = () => {
                                         <p>{res.details}</p>
                                         {
                                             res.name && <a style={{ color: '#26C6DA', fontWeight: 'bold' }}>सुझाव देने वाला का नाम: {res.name}</a>
+                                        }
+                                        {
+                                            res.ward && <a style={{ color: '#26C6DA', fontWeight: 'bold' }}>यह सुझाव वार्ड {res.ward} से प्राप्त हुआ है। </a>
                                         }
                                         <div>
                                             <span className="like-btn" onClick={() => likeFeedback(res._id)}>
