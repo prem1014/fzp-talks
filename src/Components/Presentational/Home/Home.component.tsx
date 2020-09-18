@@ -316,6 +316,31 @@ const Home = () => {
             <div className="row">
                 <div className="col-12">
                     <div className="vission app-box-shadow">
+                        <h4 className="text-center app-title">महत्वपूर्ण लिंक्स</h4>
+                        <hr />
+                        <div className="row">
+                            <div className="col-lg-4 col-md-4 col-6">
+                                <a href="http://www.biharprd.bih.nic.in/Home.aspx" target="_blank">बिहार पंचायती राज</a>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-6">
+                                <a href="http://biharboardonline.bihar.gov.in/" target="_blank">बिहार बोर्ड</a>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-6" style={{marginTop: '10px'}}>
+                                <a href="https://gopalganj.nic.in" target="_blank">गोपालगंज जिला</a>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-6" style={{marginTop: '10px'}}>
+                                <a href="http://sec.bihar.gov.in/Default.aspx" target="_blank">बिहार चुनाव आयोग</a>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-6" style={{marginTop: '10px'}}>
+                                <a href="http://pacsonline.bih.nic.in/fsy/" target="_blank">बिहार राज्य फसल सहायता योजना</a>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-6" style={{marginTop: '10px'}}>
+                                <a href="https://dbtagriculture.bihar.gov.in/" target="_blank">बिहार कृषि विभाग</a>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-6" style={{marginTop: '10px'}}>
+                                <a href="https://www.7nishchay-yuvaupmission.bihar.gov.in/" target="_blank">7 निश्चय योजना</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
