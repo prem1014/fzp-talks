@@ -128,7 +128,12 @@ const Feedback = () => {
                     <div className="row">
                         <div className="col-12">
                             <h6 className="text-center">
-                                <Button variant="contained" color="primary" onClick={() => saveFeedback()}>सुझाव सेभ कीजिये</Button>
+                                <Button
+                                    variant="contained"
+                                    disabled={!feedbackDetails.subject || !feedbackDetails.details}
+                                    color="primary" onClick={() => saveFeedback()}
+                                    title="बिषय और सुझाव दीजिये"
+                                >सुझाव सेभ कीजिये</Button>
                             </h6>
                         </div>
                     </div>
