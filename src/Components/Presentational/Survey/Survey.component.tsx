@@ -288,7 +288,6 @@ const Survey = () => {
                     <hr />
                     <h5 className="text-center">ग्राम पंचायत फैज़ुल्लाहपुर महासर्वे 2021</h5>
                     <h6 className="text-center">महासर्वे में भाग लेने के लिए अपना वार्ड चुनें</h6>
-                    <p className="text-center">वोटिंग केवल सुभह 9 : 30  से शाम के 5 : 30 तक होगा।</p>
                 </div>
             </div>
             <hr />
@@ -423,7 +422,7 @@ const Survey = () => {
                                     className="form-control"
                                 />
                             </div>
-                            {
+                            {/* {
                                 otpSent &&
                                 <div className="col-12" style={{ marginTop: '10px' }}>
                                     <input type="number"
@@ -433,17 +432,17 @@ const Survey = () => {
                                         className="form-control"
                                     />
                                 </div>
-                            }
+                            } */}
                             {
                                 !otp && !otpSent &&
                                 <div className="col-12" style={{ marginTop: '10px' }}>
                                     <button disabled={!mobileNo || mobileNo.length !== 10 || btnDisable}
-                                        onClick={(event) => getOtp()}
+                                        onClick={(event) => submit(party)}
                                         className="btn btn-info"
-                                    >ओके कीजिये</button>
+                                    >वोट कीजिये</button>
                                 </div>
                             }
-                            {
+                            {/* {
                                 otpSent && !validOtp &&
                                 <div className="col-12" style={{ marginTop: '10px' }}>
                                     <button disabled={btnDisable}
@@ -451,7 +450,7 @@ const Survey = () => {
                                         className="btn btn-info"
                                     >वोट कीजिये</button>
                                 </div>
-                            }
+                            } */}
                         </div>
                     </div>
                 </div>
