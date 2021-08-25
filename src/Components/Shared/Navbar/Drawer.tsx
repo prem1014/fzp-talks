@@ -36,7 +36,6 @@ export default function TemporaryDrawer(props: any) {
   const toggleDrawer = (anchor: Anchor, open: boolean, onMenuClose: any) => (
     event: React.KeyboardEvent | React.MouseEvent,
   ) => {
-    debugger;
     if (
       event.type === 'keydown' &&
       ((event as React.KeyboardEvent).key === 'Tab' ||
@@ -49,9 +48,10 @@ export default function TemporaryDrawer(props: any) {
 
   const list = (anchor: Anchor, onMenuClose: any) => {
     const linkList = [
-      {name: 'Home', path: '/home'},
-      {name: 'Feedback', path: '/feedback'},
-      {name: 'Join Us', path: '/reg'}
+      // {name: 'Home', path: '/home'},
+      // {name: 'Feedback', path: '/feedback'},
+      // {name: 'Join Us', path: '/reg'},
+      {name: 'Survey', path: '/survey'}
     ]
     return <div
       className={clsx(classes.list, {

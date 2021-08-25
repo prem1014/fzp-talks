@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 class AppService {
-    //private static apiUrl = 'http://localhost:9000/api/';
-    private static apiUrl = 'https://nrf-api.herokuapp.com/api/'
+    private static apiUrl = 'http://localhost:9000/api/';
+    //private static apiUrl = 'https://nrf-api.herokuapp.com/api/'
     constructor() {
 
     }

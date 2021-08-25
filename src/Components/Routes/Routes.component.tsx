@@ -17,8 +17,14 @@ const AppRoute: React.FC = () => {
                         ></Route>
                     ))
                 }
-                <Redirect from="/" exact to="home" />
+                <Redirect from="/" exact to="survey" />
             </Switch>
+            <div className="footer">
+                <h5>Designed and Developed By</h5>
+                <h6>NR Infotech</h6>
+                <h6>मुखिया, जिला पार्षद, पंचायत समिति तथा सरपंच के पद का ऑनलाइन सर्वे कराने के लिए हमे संपर्क करें</h6>
+                <h6>Mob No: 9304512957</h6>
+            </div>
         </Router>
     )
 }
