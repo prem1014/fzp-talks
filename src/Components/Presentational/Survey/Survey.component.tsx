@@ -288,6 +288,7 @@ const Survey = () => {
                     <hr />
                     <h5 className="text-center">ग्राम पंचायत फैज़ुल्लाहपुर महासर्वे 2021</h5>
                     <h6 className="text-center">महासर्वे में भाग लेने के लिए अपना वार्ड चुनें</h6>
+                    <h3 className="text-center" style={{color: 'red'}}>कुछ तकनिकी कारणों से वोटिंग नहीं हो पा रहा है । हम जल्द ही इसे ठीक कर आपको सूचित करेंगे। </h3>
                 </div>
             </div>
             <hr />
