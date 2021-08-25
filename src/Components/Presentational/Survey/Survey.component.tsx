@@ -287,7 +287,7 @@ const Survey = () => {
                     <hr />
                     <h5 className="text-center">ग्राम पंचायत फैज़ुल्लाहपुर महासर्वे 2021</h5>
                     <h6 className="text-center">महासर्वे में भाग लेने के लिए अपना वार्ड चुनें</h6>
-                    <p className="text-center">वोटिंग केवल सुभह 9 :30  से शाम के 5 : 30 तक होगा।</p>
+                    <p className="text-center">वोटिंग केवल सुभह 9 : 30  से शाम के 5 : 30 तक होगा।</p>
                 </div>
             </div>
             <hr />
