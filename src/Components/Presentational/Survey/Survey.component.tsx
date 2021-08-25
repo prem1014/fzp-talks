@@ -32,7 +32,7 @@ const Survey = () => {
     const emailUrlLocal = 'http://localhost:9000/api/otp';
     const defaultValue = 'अपना वार्ड चुनें';
     const title = 'ग्राम पंचायत फैज़ुल्लाहपुर';
-    const [isPanchayat, setIsPanchayat] = useState(false);
+    const [isPanchayat, setIsPanchayat] = useState(true);
     const [village, setVillage] = useState('');
     const [userName, setUserName] = useState('');
     const [mobileNo, setMobileNo] = useState('');
