@@ -14,7 +14,7 @@ import psImg from '../../../Assets/ps.png';
 import othImg from '../../../Assets/oth.png';
 import Modal from '../../Shared/Modal/Modal.component';
 import Toaster from '../../Shared/Toaster/Toaster.component';
-// import libphonenumber from 'google-libphonenumber';
+import libphonenumber from 'google-libphonenumber';
 
 interface IVote {
     rjd: Array<any>;
@@ -120,10 +120,10 @@ const Survey = () => {
         }
         // alert('Heavy load on server, please try after some time');
         // return
-        // if (document.cookie || localStorage.getItem('id')) {
-        //     alert('आपके मोबाइल या कंप्यूटर से एक बार वोट हो चूका है। कृपया दूसरे मोबाइल या कंप्यूटर से कोसिस करें। ')
-        //     return;
-        // }
+        if (document.cookie === '200' || localStorage.getItem('voteId')) {
+            alert('आपके मोबाइल या कंप्यूटर से एक बार वोट हो चूका है।')
+            return;
+        }
 
         const obj = {
             status: true,
@@ -144,14 +144,14 @@ const Survey = () => {
                 setMessage(res.data.message)
                 setIsToasterOpen(true)
                 getVoteFromDB();
-                localStorage.setItem('id', '' + new Date().getTime());
-                document.cookie = '' + new Date().getTime();
                 onclose();
                 setLoading(false);
                 if(!res.data.success) {
                     setToasterType('error');
                 } else {
                     setToasterType('success');
+                    localStorage.setItem('voteId', '' + new Date().getTime());
+                    document.cookie = '200';
                 }
             })
             .catch(err => {
@@ -217,10 +217,10 @@ const Survey = () => {
     }
 
     const isValidMobile = (mobileNo: string) => {
-        // const phoneUtil =  {} //libphonenumber.PhoneNumberUtil.getInstance();
-        // const isValid = phoneUtil.isValidNumberForRegion(phoneUtil.parse(mobileNo, 'IN'), 'IN');
+        const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+        const isValid = phoneUtil.isValidNumberForRegion(phoneUtil.parse(mobileNo, 'IN'), 'IN');
 
-        return true;
+        return isValid;
     }
 
     const openModal = (party: string) => {
@@ -288,7 +288,7 @@ const Survey = () => {
                     <hr />
                     <h5 className="text-center">ग्राम पंचायत फैज़ुल्लाहपुर महासर्वे 2021</h5>
                     <h6 className="text-center">महासर्वे में भाग लेने के लिए अपना वार्ड चुनें</h6>
-                    <h3 className="text-center" style={{color: 'red'}}>कुछ तकनिकी कारणों से वोटिंग नहीं हो पा रहा है । हम जल्द ही इसे ठीक कर आपको सूचित करेंगे। </h3>
+                    {/* <h3 className="text-center" style={{color: 'red'}}>कुछ तकनिकी कारणों से वोटिंग नहीं हो पा रहा है । हम जल्द ही इसे ठीक कर आपको सूचित करेंगे। </h3> */}
                 </div>
             </div>
             <hr />
