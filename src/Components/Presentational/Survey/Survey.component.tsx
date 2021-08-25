@@ -194,7 +194,6 @@ const Survey = () => {
     }
 
     const getVoteByVillage = (id: any, party: any) => {
-        debugger
         const total = items[party]?.filter((itm: any) => itm.ward === id);
 
         return total?.length;
@@ -225,10 +224,12 @@ const Survey = () => {
     }
 
     const openModal = (party: string) => {
-        const k: any = [];
-        const m = k.find((it: any) => it.mobile === 8446012999)
-        setParty(party);
-        setIsOpen(true)
+        if(village) {
+            setParty(party);
+            setIsOpen(true)
+        } else {
+            alert('अपना वार्ड चुनें');
+        }
     }
 
     const onclose = () => {
