@@ -95,7 +95,7 @@ export default function ElevateAppBar(props: Props) {
             </IconButton>
             <TemporaryDrawer position="left" open={Boolean(anchorElMenu)} onMenuClose={omMenuClose}/>
             <Typography variant="h6" className={classes.title}>
-              {/* <img src={logo} className="logo" /> */}
+              <img src={logo} className="logo" />
             </Typography>
             {auth && (
               <div>

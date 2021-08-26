@@ -17,7 +17,7 @@ const AppRoute: React.FC = () => {
                         ></Route>
                     ))
                 }
-                <Redirect from="/" exact to="survey" />
+                <Redirect from="/" exact to="home" />
             </Switch>
         </Router>
     )

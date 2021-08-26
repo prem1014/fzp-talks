@@ -48,10 +48,9 @@ export default function TemporaryDrawer(props: any) {
 
   const list = (anchor: Anchor, onMenuClose: any) => {
     const linkList = [
-      // {name: 'Home', path: '/home'},
-      // {name: 'Feedback', path: '/feedback'},
-      // {name: 'Join Us', path: '/reg'},
-      {name: 'Survey', path: '/survey'}
+      {name: 'Home', path: '/home'},
+      {name: 'Feedback', path: '/feedback'},
+      {name: 'Join Us', path: '/reg'}
     ]
     return <div
       className={clsx(classes.list, {
