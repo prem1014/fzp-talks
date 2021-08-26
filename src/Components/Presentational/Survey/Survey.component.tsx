@@ -110,16 +110,16 @@ const Survey = () => {
         //     alert('अपना सही नाम दीजिये। ');
         //     return;
         // }
-        if (!mobileNo) {
-            alert('मोबाइल नंबर दीजिये');
+        if (!email) {
+            alert('email id दीजिये');
             return;
         }
-        if (!isValidMobile(mobileNo)) {
-            alert('मोबाइल नंबर वैध नहीं है। ');
+        if (!_isValidEmail(email)) {
+            alert('email id वैध नहीं है। ');
             return;
         }
-        alert('Heavy load on server, please try after some time');
-        return
+        // alert('Heavy load on server, please try after some time');
+        // return
         if (document.cookie === '200' || localStorage.getItem('voteId')) {
             alert('आपके मोबाइल या कंप्यूटर से एक बार वोट हो चूका है।')
             return;
@@ -129,7 +129,8 @@ const Survey = () => {
             status: true,
             ward: village,
             name: 'userName',
-            mobile: mobileNo
+            mobile: mobileNo,
+            email: email
         }
 
         let voteShareCopy = { ...votes };
@@ -158,6 +159,11 @@ const Survey = () => {
                 setBtnDisable(false);
                 setLoading(false);
             })
+    }
+
+    const _isValidEmail = (email: string) => {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
     }
 
     const getVotePer = (vote: number, total: number) => {
@@ -240,9 +246,17 @@ const Survey = () => {
     }
 
     const getOtp = () => {
+        if (!email) {
+            alert('email id दीजिये');
+            return;
+        }
+        if (!_isValidEmail(email)) {
+            alert('email id वैध नहीं है। ');
+            return;
+        }
         setLoading(true);
-        setLoaderMessage('आपके नंबर पे otp भेजा जा रहा है।');
-        axios.post(emailUrlProd, { mobile: mobileNo })
+        setLoaderMessage('आपके email id पे otp भेजा जा रहा है।');
+        axios.post(emailUrlProd, { mobile: email })
             .then(res => {
                 if (res.data.successCode === 200) {
                     setMessage(res.data.message)
@@ -416,14 +430,14 @@ const Survey = () => {
                                 />
                             </div> */}
                             <div className="col-12" style={{ marginTop: '10px' }}>
-                                <input type="number"
-                                    value={mobileNo}
-                                    placeholder="मोबाइल नंबर दीजिये।"
-                                    onChange={(e) => inputHndl(e, 'mobile')}
+                                <input type="text"
+                                    value={email}
+                                    placeholder="email id दीजिये।"
+                                    onChange={(e) => inputHndl(e, 'email')}
                                     className="form-control"
                                 />
                             </div>
-                            {/* {
+                            {
                                 otpSent &&
                                 <div className="col-12" style={{ marginTop: '10px' }}>
                                     <input type="number"
@@ -433,17 +447,17 @@ const Survey = () => {
                                         className="form-control"
                                     />
                                 </div>
-                            } */}
+                            }
                             {
                                 !otp && !otpSent &&
                                 <div className="col-12" style={{ marginTop: '10px' }}>
-                                    <button disabled={!mobileNo || mobileNo.length !== 10 || btnDisable}
-                                        onClick={(event) => submit(party)}
+                                    <button disabled={btnDisable}
+                                        onClick={(event) => getOtp()}
                                         className="btn btn-info"
-                                    >वोट कीजिये</button>
+                                    >OK</button>
                                 </div>
                             }
-                            {/* {
+                            {
                                 otpSent && !validOtp &&
                                 <div className="col-12" style={{ marginTop: '10px' }}>
                                     <button disabled={btnDisable}
@@ -451,7 +465,7 @@ const Survey = () => {
                                         className="btn btn-info"
                                     >वोट कीजिये</button>
                                 </div>
-                            } */}
+                            }
                         </div>
                     </div>
                 </div>
