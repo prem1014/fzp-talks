@@ -138,7 +138,8 @@ const Home = () => {
             <div className="row">
                 <div className="col-lg-4 col-md-4 col-12">
                     <div className="vission app-box-shadow">
-                        <h4 className="text-center app-title">हमारी सोच</h4>
+                        {/* <h4 className="text-center app-title">हमारी सोच</h4> */}
+                        <p>सर्वे कराने का मकसद सिर्फ और सिर्फ लोगो को विचार जानने का था लेकिन कुछ लोगों इसे गलत दिशा में ले जा रहे है इसलिए सर्वे को बंद किया जा रहा है। आप लोगो का बहुत बहुत धन्यवाद। </p>
                         <hr />
                         <h5 className="text-center">
                             'फैज़ुल्लाहपुर Talks' अगले 10 वर्ष में फैज़ुल्लाहपुर को बिहार के 10 अग्रणी गावों की
