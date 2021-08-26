@@ -149,7 +149,9 @@ const Home = () => {
                         <hr />
                         <h2 className="text-center">{users.count}</h2>
                         <h5 className="text-center" style={{ color: '#07cc10', fontWeight: 'bold' }}>लोग हमसे जुड़ चुके है।</h5>
+                         { users.count &&
                         <p>अभी अभी <strong>{users.name} जी</strong> <strong>(वार्ड {users.ward})</strong> हमसे जुड़ चुके हैं। हमसे जुड़ने के लिए आपका बहुत बहुत धन्यवाद । </p>
+                         }
                         <hr />
                         <h5 className="text-center">
                             <Button variant="contained" color="primary" onClick={() => userReg()}>हमसे जुड़ें</Button>
