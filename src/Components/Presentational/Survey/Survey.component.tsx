@@ -460,7 +460,7 @@ const Survey = () => {
                             {
                                 otpSent && !validOtp &&
                                 <div className="col-12" style={{ marginTop: '10px' }}>
-                                    <button disabled={btnDisable}
+                                    <button disabled={!otp || btnDisable}
                                         onClick={(event) => submit(party)}
                                         className="btn btn-info"
                                     >वोट कीजिये</button>
