@@ -118,8 +118,8 @@ const Survey = () => {
             alert('मोबाइल नंबर वैध नहीं है। ');
             return;
         }
-        // alert('Heavy load on server, please try after some time');
-        // return
+        alert('Heavy load on server, please try after some time');
+        return
         if (document.cookie === '200' || localStorage.getItem('voteId')) {
             alert('आपके मोबाइल या कंप्यूटर से एक बार वोट हो चूका है।')
             return;
