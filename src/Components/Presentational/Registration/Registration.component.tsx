@@ -66,7 +66,7 @@ const UserRegistration = () => {
 
     const userReg = () => {
         setLoading(true);
-        AppService.saveUsers({...userInfo, _id: userInfo.mobile})
+        AppService.saveUsers({...userInfo, _id: btoa(userInfo.mobile)})
         .then( res => {
             setToasterType('success');
             if(!res.data.success) {
